@@ -14,7 +14,7 @@ RES_H=1080
 # Calculate the total delay time per cycle
 SLEEP_DELAY=$(($TOTAL_DELAY-$CAM_DELAY))
 
-FOLDER_NAME=imgs
+FOLDER_NAME=images
 mkdir -p $FOLDER_NAME # create image root folder if not exist
 
 IDX=0 # image index
