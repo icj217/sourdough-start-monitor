@@ -39,7 +39,7 @@ while true; do
                 echo "Created folder: ${FOLDER_NAME}"
         fi
         # Take image
-        raspistill --nopreview -t $CAM_DELAY -o ./$FOLDER_NAME/$FNAME.jpg -w $RES_W -h $RES_H
+        raspistill --nopreview -t $CAM_DELAY -o ./$FOLDER_NAME/$FNAME.jpg
 
         echo "Captured: ${FNAME}"
         IDX=$((IDX+1))
