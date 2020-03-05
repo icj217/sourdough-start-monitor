@@ -14,7 +14,7 @@ RES_H=1080
 # Calculate the total delay time per cycle
 SLEEP_DELAY=$(($TOTAL_DELAY-$CAM_DELAY))
 
-FOLDER_NAME=images
+FOLDER_NAME=/srv/images/sourdough
 mkdir -p $FOLDER_NAME # create image root folder if not exist
 
 IDX=0 # image index
@@ -39,7 +39,7 @@ while true; do
                 echo "Created folder: ${FOLDER_NAME}"
         fi
         # Take image
-        raspistill --nopreview -t $CAM_DELAY -o ./$FOLDER_NAME/$FNAME.jpg
+        raspistill --nopreview -t $CAM_DELAY -o $FOLDER_NAME/$FNAME.jpg
 
         echo "Captured: ${FNAME}"
         IDX=$((IDX+1))
