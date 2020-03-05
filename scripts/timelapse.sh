@@ -29,7 +29,7 @@ trap cleanup INT
 while true; do
         DATE=$(date +%Y-%m-%d)
         TS=$(date +%Y-%m-%d_%H-%M-%S)
-        FNAME="${TS}_(${IDX})" # image filename
+        FNAME="${TS}" # image filename
 
         # Create folder for current timelapse set
         if [ $IDX -eq 0 ]
