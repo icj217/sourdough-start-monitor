@@ -41,7 +41,7 @@ while true; do
         echo "Captured: ${FNAME}"
 
         # Upload to S3
-        aws s3 cp --only-show-errors ${FNAME} s3://${S3_BUCKET_NAME}/raw/${FNAME}
+        aws s3 cp --only-show-errors $FOLDER_NAME/${FNAME} s3://${S3_BUCKET_NAME}/raw/${FNAME}
 
         # Delete images older than 24 hours
         find $FOLDER_NAME -type f -mtime +1 -exec rm -f {} \;
