@@ -15,7 +15,6 @@ RES_H=1080
 SLEEP_DELAY=$(($TOTAL_DELAY-$CAM_DELAY))
 
 FOLDER_NAME=/srv/images/sourdough
-mkdir -p $FOLDER_NAME # create image root folder if not exist
 
 IDX=0 # image index
 
@@ -29,7 +28,7 @@ trap cleanup INT
 while true; do
         DATE=$(date +%Y-%m-%d)
         TS=$(date +%Y-%m-%d_%H-%M-%S)
-        FNAME="${TS}" # image filename
+        FNAME="${TS}.jpg" # image filename
 
         # Create folder for current timelapse set
         if [ $IDX -eq 0 ]
@@ -38,9 +37,15 @@ while true; do
                 echo "Created folder: ${FOLDER_NAME}"
         fi
         # Take image
-        raspistill --nopreview -t $CAM_DELAY -o $FOLDER_NAME/$FNAME.jpg
-
+        raspistill --nopreview -t $CAM_DELAY -o $FOLDER_NAME/$FNAME -w $RES_W -h $RES_H
         echo "Captured: ${FNAME}"
+
+        # Upload to S3
+        aws s3 cp --only-show-errors ${FNAME} s3://${S3_BUCKET_NAME}/raw/${FNAME}
+
+        # Delete images older than 24 hours
+        find $FOLDER_NAME -type f -mtime +1 -exec rm -f {} \;
+
         IDX=$((IDX+1))
         sleep $SLEEP_DELAY
 done
