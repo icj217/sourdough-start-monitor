@@ -34,7 +34,6 @@ while true; do
         # Create folder for current timelapse set
         if [ $IDX -eq 0 ]
         then
-                FOLDER_NAME=$FOLDER_NAME/$DATE
                 mkdir -p $FOLDER_NAME
                 echo "Created folder: ${FOLDER_NAME}"
         fi
