@@ -1,0 +1,41 @@
+service: sourdough-starter-monitor
+
+provider:
+  name: aws
+  runtime: python3.7
+  environment:
+    S3_BUCKET_NAME: 'sourdough-starter-monitor'
+    TIMELAPSE_IMAGE: 'timelapse/timelapse.gif'
+    TIMELAPSE_MAX_FRAMES: 144 # 12 frames per hour so 12 hours worth of images
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+      Resource:
+        Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - ${self:provider.environment.S3_BUCKET_NAME}
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+        - "s3:GetObject"
+      Resource:
+        Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - ${self:provider.environment.S3_BUCKET_NAME}
+            - "/*"
+
+functions:
+  generate_timelapse:
+    handler: generate_timelapse.handler
+    events:
+      - s3:
+          bucket: ${self:provider.environment.S3_BUCKET_NAME}
+          existing: true
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: raw/
+    layers:
+      - arn:aws:lambda:us-east-1:113088814899:layer:Klayers-python37-Pillow:9	
