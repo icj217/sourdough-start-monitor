@@ -55,7 +55,7 @@ def update_timelapse(current_timelapse, new_frame_key):
         format='gif',
         save_all=True,
         append_images=new_timelapse_frames[1:],
-        duration=100,
+        duration=50,
         loop=0)
     return new_timelapse
 
@@ -84,7 +84,7 @@ def handler(event, context):
             format='gif',
             save_all=True,
             append_images=frames[1:],
-            duration=100,
+            duration=50,
             loop=0)
         print('saved GIF: {} bytes'.format(len(timelapse.getvalue())))
         upload_timelapse(timelapse.getvalue())

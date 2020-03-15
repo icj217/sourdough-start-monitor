@@ -19,6 +19,7 @@ provider:
     - Effect: "Allow"
       Action:
         - "s3:PutObject"
+        - "s3:PutObjectAcl"
         - "s3:GetObject"
       Resource:
         Fn::Join:
@@ -30,6 +31,7 @@ provider:
 functions:
   generate_timelapse:
     handler: generate_timelapse.handler
+    timeout: 300
     events:
       - s3:
           bucket: ${self:provider.environment.S3_BUCKET_NAME}
