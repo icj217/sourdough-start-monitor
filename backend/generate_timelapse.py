@@ -28,7 +28,7 @@ def get_raw_image(key):
     return image
 
 def upload_timelapse(content):
-    s3.put_object(Bucket=s3_bucket, Key=timelapse_file, Body=content, ContentType='image/gif')
+    s3.put_object(Bucket=s3_bucket, Key=timelapse_file, Body=content, ContentType='image/gif', ACL='public-read')
 
 def update_timelapse(current_timelapse, new_frame_key):
     new_timelapse = io.BytesIO()
