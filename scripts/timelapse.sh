@@ -45,8 +45,8 @@ while true; do
                 -o $FOLDER_NAME/$FNAME \
                 -w $RES_W -h $RES_H \
                 -rot $ROTATE \
-                -cfx 128:128 \ # Greyscale
-                --annotate 12 --annotateex 64 # Add date/time in 64px
+                -cfx 128:128 \
+                -a 12 -ae 64
         echo "Captured: ${FNAME}"
 
         # Upload to S3
