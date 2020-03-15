@@ -44,7 +44,7 @@ while true; do
         aws s3 cp --only-show-errors $FOLDER_NAME/${FNAME} s3://${S3_BUCKET_NAME}/raw/${FNAME}
 
         # Delete images older than 24 hours
-        find $FOLDER_NAME -type f -mtime +1 -exec rm -f {} \;
+        find $FOLDER_NAME -type f -mtime 1 -exec rm -f {} \;
 
         IDX=$((IDX+1))
         sleep $SLEEP_DELAY
