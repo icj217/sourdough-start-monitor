@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Sourdough Starter Monitor</title>
+        <script type="text/javascript">
+            var url = "https://sourdough-starter-monitor.s3.amazonaws.com/timelapse/timelapse.gif"
+            
+            function refresh() {
+                var d = new Date();
+                var newURL = `${url}?cache=${d.getTime()}`;
+                document.getElementById("timelapse").src = newURL;
+            }
+        </script>
+    </head>
+    <style>
+        body {
+            margin: auto;
+            text-align: center;
+        }
+        button {
+            background-color: #008CBA; /* Blue */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            width: 50%;
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <body>
+        <h1>🍞 Sourdough Starter Monitor 🍞</h1>
+        <button onclick="refresh()">Refresh Timelapse</button>
+        <br/>
+        <br/>
+        <img id="timelapse" src="https://sourdough-starter-monitor.s3.amazonaws.com/timelapse/timelapse.gif" alt="Timelapse">
+    </body>
+</html>
