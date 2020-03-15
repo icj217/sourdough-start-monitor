@@ -12,32 +12,47 @@
         </script>
     </head>
     <style>
-        body {
-            margin: auto;
-            text-align: center;
-        }
         button {
             background-color: #008CBA; /* Blue */
             border: none;
             color: white;
-            padding: 15px 32px;
+            padding: 10px 10px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            width: 50%;
+            width: 30%;
         }
-        img {
+        * {
+            margin: auto;
+            padding: 0;
+            text-align: center;
+            align-content: center;
+        }
+        .imgbox {
+            height: 80vh;
+            width: 80vw;
+            align-content: center;
+        }
+        .center-fit {
             display: block;
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            vertical-align: auto;
+            align-content: center;
             margin-left: auto;
             margin-right: auto;
         }
     </style>
     <body>
-        <h1>🍞 Sourdough Starter Monitor 🍞</h1>
-        <button onclick="refresh()">Refresh Timelapse</button>
+        <br/>
+        <button onclick="refresh()">🍞 Refresh Timelapse 🍞</button>
         <br/>
         <br/>
-        <img id="timelapse" src="https://sourdough-starter-monitor.s3.amazonaws.com/timelapse/timelapse.gif" alt="Timelapse">
+        <div class="imgbox">
+            <img class="center-fit" id="timelapse" src="https://sourdough-starter-monitor.s3.amazonaws.com/timelapse/timelapse.gif" alt="Timelapse">
+        </div>
+        
     </body>
 </html>
