@@ -8,8 +8,11 @@ TOTAL_DELAY=300 # in seconds
 CAM_DELAY=1 # need to have a nonzero delay for raspistill
 
 # Must be 1.33 ratio
-RES_W=1440
-RES_H=1080
+RES_W=1080
+RES_H=1440
+
+# Camera is mounted off-axis
+ROTATE=270
 
 # Calculate the total delay time per cycle
 SLEEP_DELAY=$(($TOTAL_DELAY-$CAM_DELAY))
@@ -37,7 +40,7 @@ while true; do
                 echo "Created folder: ${FOLDER_NAME}"
         fi
         # Take image
-        raspistill --nopreview -t $CAM_DELAY -o $FOLDER_NAME/$FNAME -w $RES_W -h $RES_H
+        raspistill --nopreview -t $CAM_DELAY -o $FOLDER_NAME/$FNAME -w $RES_W -h $RES_H -rot $ROTATE
         echo "Captured: ${FNAME}"
 
         # Upload to S3
